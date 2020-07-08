@@ -8,29 +8,25 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=uvcdynctrl
-PKG_VERSION:=0.2.5
-PKG_RELEASE:=2
+PKG_VERSION:=0.2.4
+PKG_REV:=2
 
 PKG_SOURCE:=libwebcam-src-$(PKG_VERSION).tar.gz
 PKG_SOURCE_URL:=@SF/libwebcam
-PKG_HASH:=3ca5199c7b8398b655a7c38e3ad4191bb053b1486503287f20d30d141bda9d41
-PKG_BUILD_DIR:=$(BUILD_DIR)/libwebcam-$(PKG_VERSION)
-
+PKG_HASH:=91741aca11f079eb6d043e31b7da6fe1f7927c28d7496590386928f8466b4297
 PKG_MAINTAINER:=Roger D <rogerdammit@gmail.com>
-CMAKE_INSTALL:=1
+
+PKG_BUILD_DIR:=$(BUILD_DIR)/libwebcam-src-$(PKG_VERSION)
 
 include $(INCLUDE_DIR)/package.mk
 include $(INCLUDE_DIR)/cmake.mk
-include $(INCLUDE_DIR)/nls.mk
 
 define Package/uvcdynctrl
   SECTION:=utils
   CATEGORY:=Utilities
   DEPENDS:=+libwebcam
   TITLE:=Manage dynamic controls in uvcvideo
-  LICENSE:=GPL-3.0-or-later
-  LICENSE_FILES:=uvcdynctrl/COPYING
-  URL:=https://sourceforge.net/projects/libwebcam/
+  URL:=http://sourceforge.net/projects/libwebcam/
   MENU:=1
 endef
 
@@ -43,16 +39,17 @@ endef
 define Package/libwebcam
   SECTION:=libs
   CATEGORY:=Libraries
-  DEPENDS:=+libxml2 $(ICONV_DEPENDS)
+  DEPENDS:=+libxml2 +libiconv-full
   TITLE:=Webcam library
-  LICENSE:=LGPL-3.0-or-later
-  LICENSE_FILES:=libwebcam/COPYING.LESSER
-  URL:=https://sourceforge.net/projects/libwebcam/
+  URL:=http://sourceforge.net/projects/libwebcam/
 endef
 
 define Package/libwebcam/description
   $(call Package/uvcdynctrl/description)
 endef
+
+TARGET_CFLAGS += -I$(STAGING_DIR)/usr/lib/libiconv-full/include -liconv
+TARGET_LDFLAGS += -L$(STAGING_DIR)/usr/lib/libiconv-full/lib
 
 define Package/uvcdynctrl/install
 	$(INSTALL_DIR) $(1)/usr/{bin,share}
@@ -63,6 +60,12 @@ endef
 define Package/libwebcam/install
 	$(INSTALL_DIR) $(1)/usr/lib
 	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libwebcam.so* $(1)/usr/lib/
+endef
+
+define Build/InstallDev
+	$(INSTALL_DIR) $(1)/usr/{include,lib}
+	$(CP) $(PKG_INSTALL_DIR)/usr/include/* $(1)/usr/include/
+	$(CP) $(PKG_INSTALL_DIR)/usr/lib/libwebcam.{a,so*} $(1)/usr/lib/
 endef
 
 $(eval $(call BuildPackage,uvcdynctrl))

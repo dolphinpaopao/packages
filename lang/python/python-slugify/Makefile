@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-slugify
 PKG_VERSION:=4.0.0
-PKG_RELEASE:=2
+PKG_RELEASE:=1
 
 PYPI_NAME:=$(PKG_NAME)
 PKG_HASH:=a8fc3433821140e8f409a9831d13ae5deccd0b033d4744d94b31fea141bdd84c
@@ -33,6 +33,7 @@ define Package/python3-slugify
     +python3-codecs \
     +python3-setuptools \
     +python3-text-unidecode
+  VARIANT:=python3
 endef
 
 define Package/python3-slugify/description

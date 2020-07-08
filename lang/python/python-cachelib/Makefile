@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-cachelib
 PKG_VERSION:=0.1
-PKG_RELEASE:=2
+PKG_RELEASE:=1
 
 PYPI_NAME:=cachelib
 PKG_HASH:=8b889b509d372095357b8705966e1282d40835c4126d7c2b07fd414514d8ae8d
@@ -26,6 +26,7 @@ define Package/python3-cachelib
   TITLE:=cachelib
   URL:=https://github.com/pallets/cachelib
   DEPENDS:=+python3-light
+  VARIANT:=python3
 endef
 
 define Package/python3-cachelib/description

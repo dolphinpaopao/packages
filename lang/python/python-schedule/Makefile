@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=python-schedule
 PKG_VERSION:=0.6.0
-PKG_RELEASE:=2
+PKG_RELEASE:=1
 
 PYPI_NAME:=schedule
 PKG_HASH:=f9fb5181283de4db6e701d476dd01b6a3dd81c38462a54991ddbb9d26db857c9
@@ -29,6 +29,7 @@ define Package/python3-schedule
   TITLE:=Job scheduling for humans
   URL:=https://github.com/dbader/schedule
   DEPENDS:=+python3-light +python3-logging
+  VARIANT:=python3
 endef
 
 define Package/python3-schedule/description

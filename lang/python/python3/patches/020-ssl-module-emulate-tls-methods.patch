@@ -11,6 +11,9 @@ SSL_CTX_set_min/max_proto_version().
  2 files changed, 108 insertions(+), 30 deletions(-)
  create mode 100644 Misc/NEWS.d/next/Library/2018-02-25-20-05-51.bpo-30008.6Bmyhr.rst
 
+diff --git a/Misc/NEWS.d/next/Library/2018-02-25-20-05-51.bpo-30008.6Bmyhr.rst b/Misc/NEWS.d/next/Library/2018-02-25-20-05-51.bpo-30008.6Bmyhr.rst
+new file mode 100644
+index 000000000000..e0a08464a1e1
 --- /dev/null
 +++ b/Misc/NEWS.d/next/Library/2018-02-25-20-05-51.bpo-30008.6Bmyhr.rst
 @@ -0,0 +1,4 @@
@@ -18,9 +21,11 @@ SSL_CTX_set_min/max_proto_version().
 +1.1.0. The version specific TLS methods are emulated with TLS_method() plus
 +SSL_CTX_set_min/max_proto_version(). Pseudo random numbers are generated
 +with RAND_bytes().
+diff --git a/Modules/_ssl.c b/Modules/_ssl.c
+index f50823e6947a..827026e3bf5c 100644
 --- a/Modules/_ssl.c
 +++ b/Modules/_ssl.c
-@@ -45,14 +45,6 @@ static PySocketModule_APIObject PySocket
+@@ -45,14 +45,6 @@ static PySocketModule_APIObject PySocketModule;
  #include <sys/poll.h>
  #endif
  
@@ -43,7 +48,7 @@ SSL_CTX_set_min/max_proto_version().
  #define TLS_method SSLv23_method
  #define TLS_client_method SSLv23_client_method
  #define TLS_server_method SSLv23_server_method
-@@ -896,7 +889,7 @@ _ssl_configure_hostname(PySSLSocket *sel
+@@ -896,7 +889,7 @@ _ssl_configure_hostname(PySSLSocket *self, const char* server_hostname)
                  goto error;
              }
          } else {
@@ -52,7 +57,7 @@ SSL_CTX_set_min/max_proto_version().
                                             ASN1_STRING_length(ip))) {
                  _setSSLError(NULL, 0, __FILE__, __LINE__);
                  goto error;
-@@ -1372,8 +1365,9 @@ _get_peer_alt_names (X509 *certificate)
+@@ -1372,8 +1365,9 @@ _get_peer_alt_names (X509 *certificate) {
                      goto fail;
                  }
                  PyTuple_SET_ITEM(t, 0, v);
@@ -64,7 +69,7 @@ SSL_CTX_set_min/max_proto_version().
                  if (v == NULL) {
                      Py_DECREF(t);
                      goto fail;
-@@ -3078,44 +3072,124 @@ _ssl__SSLContext_impl(PyTypeObject *type
+@@ -3031,44 +3025,124 @@ _ssl__SSLContext_impl(PyTypeObject *type, int proto_version)
      long options;
      SSL_CTX *ctx = NULL;
      X509_VERIFY_PARAM *params;
@@ -207,7 +212,7 @@ SSL_CTX_set_min/max_proto_version().
          _setSSLError(NULL, 0, __FILE__, __LINE__);
          return NULL;
      }
-@@ -5288,7 +5362,7 @@ PySSL_RAND(int len, int pseudo)
+@@ -5241,7 +5315,7 @@ PySSL_RAND(int len, int pseudo)
      if (bytes == NULL)
          return NULL;
      if (pseudo) {

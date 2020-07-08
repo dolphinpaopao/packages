@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=aiohttp-cors
 PKG_VERSION:=0.7.0
-PKG_RELEASE:=2
+PKG_RELEASE:=1
 
 PYPI_NAME:=aiohttp_cors
 PYPI_SOURCE_NAME:=aiohttp-cors
@@ -32,6 +32,7 @@ define Package/python3-aiohttp-cors
   DEPENDS:= \
 	+python3-aiohttp \
 	+python3-light
+  VARIANT:=python3
 endef
 
 define Package/python3-aiohttp-cors/description

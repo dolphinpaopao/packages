@@ -23,8 +23,7 @@ start_service() {
 	}
 
 	[ -d /var/log/prosody ] && {
-		chown -R root:prosody /etc/prosody
-		chown -R prosody:prosody /etc/prosody/data
+		chown -R prosody:prosody /etc/prosody
 	}
 
 	[ -f /sbin/paxctl ] && {
