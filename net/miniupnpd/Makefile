@@ -8,17 +8,8 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=miniupnpd
-<<<<<<< HEAD
-PKG_VERSION:=2.1.20200510
-<<<<<<< HEAD
-PKG_RELEASE:=5
-=======
 PKG_VERSION:=2.0.20170421
 PKG_RELEASE:=3
->>>>>>> parent of c36ad69... packages: sync to new packages
-=======
-PKG_RELEASE:=3
->>>>>>> parent of 897c45b... miniupnpd: adjust default package
 
 PKG_SOURCE_URL:=http://miniupnp.free.fr/files
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
@@ -32,15 +23,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/miniupnpd
   SECTION:=net
   CATEGORY:=Network
-<<<<<<< HEAD
-<<<<<<< HEAD
-  DEPENDS:=+iptables +libip4tc +libuuid +libcap-ng
-=======
   DEPENDS:=+iptables +libip4tc +libuuid
->>>>>>> parent of c36ad69... packages: sync to new packages
-=======
-  DEPENDS:=+iptables +libip4tc +IPV6:libip6tc +IPV6:ip6tables +libuuid +libcap-ng
->>>>>>> parent of 897c45b... miniupnpd: adjust default package
   TITLE:=Lightweight UPnP IGD, NAT-PMP & PCP daemon
   SUBMENU:=Firewall
   URL:=http://miniupnp.free.fr/
