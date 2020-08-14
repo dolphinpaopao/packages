@@ -9,7 +9,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=collectd
 PKG_VERSION:=5.11.0
-PKG_RELEASE:=9
+PKG_RELEASE:=7
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://collectd.org/files/ \
@@ -106,6 +106,7 @@ COLLECTD_PLUGINS_DISABLED:= \
 	tape \
 	tokyotyrant \
 	turbostat \
+	ubi \
 	uuid \
 	varnish \
 	virt \
@@ -189,7 +190,6 @@ COLLECTD_PLUGINS_SELECTED:= \
 	ted \
 	thermal \
 	threshold \
-	ubi \
 	unixsock \
 	uptime \
 	users \
@@ -399,7 +399,7 @@ $(eval $(call BuildPlugin,chrony,chrony status input,chrony,))
 $(eval $(call BuildPlugin,conntrack,connection tracking table size input,conntrack,))
 $(eval $(call BuildPlugin,contextswitch,context switch input,contextswitch,))
 $(eval $(call BuildPlugin,cpu,CPU input,cpu,))
-$(eval $(call BuildPlugin,cpufreq,CPU Freq input,cpufreq,@(TARGET_x86||TARGET_x86_64||TARGET_mvebu||TARGET_ipq806x||TARGET_armvirt||TARGET_ipq40xx||TARGET_bcm27xx_bcm2709))) # Only enable on targets with CPUs supporting frequency scaling
+$(eval $(call BuildPlugin,cpufreq,CPU Freq input,cpufreq,@(TARGET_x86||TARGET_x86_64||TARGET_mvebu||TARGET_ipq806x||TARGET_armvirt||TARGET_ipq40xx||TARGET_brcm2708_bcm2709))) # Only enable on targets with CPUs supporting frequency scaling
 $(eval $(call BuildPlugin,csv,CSV output,csv,))
 $(eval $(call BuildPlugin,curl,cURL input,curl,+PACKAGE_collectd-mod-curl:libcurl))
 #$(eval $(call BuildPlugin,dbi,relational database input,dbi,+PACKAGE_collectd-mod-dbi:libdbi))
@@ -413,7 +413,7 @@ $(eval $(call BuildPlugin,exec,process exec input,exec,))
 $(eval $(call BuildPlugin,filecount,file count input,filecount,))
 $(eval $(call BuildPlugin,fscache,file-system based caching framework input,fscache,))
 $(eval $(call BuildPlugin,interface,network interfaces input,interface,))
-$(eval $(call BuildPlugin,iptables,iptables status input,iptables,+PACKAGE_collectd-mod-iptables:iptables +libip4tc +libip6tc))
+$(eval $(call BuildPlugin,iptables,iptables status input,iptables,+PACKAGE_collectd-mod-iptables:iptables +libiptc))
 $(eval $(call BuildPlugin,irq,interrupt usage input,irq,))
 $(eval $(call BuildPlugin,iwinfo,libiwinfo wireless statistics,iwinfo,+PACKAGE_collectd-mod-iwinfo:libiwinfo))
 $(eval $(call BuildPlugin,load,system load input,load,))
@@ -453,7 +453,6 @@ $(eval $(call BuildPlugin,ted,The Energy Detective input,ted,))
 $(eval $(call BuildPlugin,tcpconns,TCP connection tracking input,tcpconns,))
 $(eval $(call BuildPlugin,thermal,system temperatures input,thermal,))
 $(eval $(call BuildPlugin,threshold,Notifications and thresholds,threshold,))
-$(eval $(call BuildPlugin,ubi,Unsorted block images,ubi,@NAND_SUPPORT))
 $(eval $(call BuildPlugin,unixsock,unix socket output,unixsock,))
 $(eval $(call BuildPlugin,uptime,uptime status input,uptime,))
 $(eval $(call BuildPlugin,users,user logged in status input,users,))
