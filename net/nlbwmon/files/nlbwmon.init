@@ -70,7 +70,7 @@ parse_config() {
 	add_option "$cfg" -p protocol_database /usr/share/nlbwmon/protocols
 	add_option "$cfg" -G database_generations 10
 	add_option "$cfg" -I database_interval 1
-	add_option "$cfg" -L database_limit 10000
+	add_option "$cfg" -L database_limit 100000
 
 	add_bool "$cfg" -P database_prealloc 0
 	add_bool "$cfg" -Z database_compress 1
