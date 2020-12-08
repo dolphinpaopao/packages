@@ -48,7 +48,7 @@ $(call Package/wget/Default)
   DEPENDS+= +libopenssl +librt
   TITLE+= (with SSL support)
   VARIANT:=ssl
-  PROVIDES+=gnu-wget
+  PROVIDES+=wget-ssl
   ALTERNATIVES:=300:/usr/bin/wget:/usr/bin/wget-ssl
 endef
 
