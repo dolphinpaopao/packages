@@ -8,14 +8,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=miniupnpd
-PKG_VERSION:=2.2.0
-PKG_RELEASE:=2
+PKG_VERSION:=2.1.20200510
+PKG_RELEASE:=5
 
 PKG_SOURCE_URL:=https://miniupnp.tuxfamily.org/files
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_HASH:=f105210a13ed0ebfc649f661ecc59e0a072cc547b04977851f22b5521b4cadff
+PKG_HASH:=821e708f369cc1fb851506441fbc3a1f4a1b5a8bf8e84a9e71758a32f5127e8b
 
-PKG_MAINTAINER:=
 PKG_LICENSE:=BSD-3-Clause
 PKG_LICENSE_FILES:=LICENSE
 PKG_CPE_ID:=cpe:/a:miniupnp_project:miniupnpd
@@ -29,7 +28,7 @@ include $(INCLUDE_DIR)/version.mk
 define Package/miniupnpd
   SECTION:=net
   CATEGORY:=Network
-  DEPENDS:=+iptables +libip4tc +IPV6:libip6tc +IPV6:ip6tables +libuuid +libcap-ng
+  DEPENDS:=+iptables +libip4tc +libuuid +libcap-ng
   TITLE:=Lightweight UPnP IGD, NAT-PMP & PCP daemon
   SUBMENU:=Firewall
   URL:=https://miniupnp.tuxfamily.org/
@@ -49,8 +48,7 @@ CONFIGURE_ARGS = \
 	--igd2 \
 	--leasefile \
 	--portinuse \
-	--firewall=iptables \
-	--disable-fork
+	--firewall=iptables
 
 TARGET_CFLAGS += $(FPIC) -flto
 TARGET_LDFLAGS += -Wl,--gc-sections,--as-needed
